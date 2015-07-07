@@ -1,0 +1,15 @@
+name: Veight Zhou
+description:
+meta_description:
+
+markdown: redcarpet
+highlighter: pygments
+logo: false
+paginate: 15
+baseurl: /
+domain_name: 'http://veightz.net'
+google_analytics: 'UA-XXXXXXXX-X'
+
+# Details for the RSS feed generator
+url:            'veightz.net'
+author:         'Veight Zhou'
