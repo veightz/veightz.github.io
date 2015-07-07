@@ -57,33 +57,49 @@ post_class: post-template
                     <li><span>{{ post.date | date_to_string }}</span>  <a href="{{ post.url }}">{{ post.title }}</a></li>
                 {% endfor %}
             </ul>
+
         </section>
         {% endif %}
 
+        <!-- Duoshuo Comment BEGIN -->
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+        var duoshuoQuery = {short_name:"veightz"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'http://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        </script>
+        <!-- Duoshuo Comment END -->
+
         <footer class="post-footer">
             <!-- If we want to display author's name and bio -->
-            {% if site.author %}
-                <figure class="author-image">
+            <!-- {% if site.author %} -->
+                <!-- <figure class="author-image">
                     <a class="img" href="{{ site.baseurl }}" style="background-image: url(/assets/images/profile.png)">
                     <span class="hidden">{{site.author}}'s Picture</span></a>
                 </figure>
                 <section class="author">
                     <!-- Author Name -->
-                    <h4> {{ site.author }} </h4>
+                    <!-- <h4> {{ site.author }} </h4> -->
                     <!-- Author Bio -->
-                    <p>
-                        Here goes the author description. You might want to place some links too in here
-                    </p>
-                </section>
-            {% endif %}
+                    <!-- <p> -->
+                        <!-- Here goes the author description. You might want to place some links too in here -->
+                    <!-- </p> -->
+                <!-- </section> -->
+            <!-- {% endif %} -->
 
             <!-- Share links section -->
-            {% include share.html %}
+            <!-- {% include share.html %} -->
 
             <!-- Disqus comments -->
-            {% if page.disqus %}
+            <!-- {% if page.disqus %}
                 {% include disqus.html %}
-            {% endif %}
+            {% endif %} -->
 
         </footer>
 
