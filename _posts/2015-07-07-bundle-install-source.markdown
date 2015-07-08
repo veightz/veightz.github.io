@@ -10,7 +10,7 @@ date: 2015-07-07
 bundle install
 {% endhighlight %}
 
-之后， 出现了一下内容。ß
+之后， 出现了一下内容。
 
 {% highlight sh%}
 Fetching gem metadata from https://rubygems.org/............
