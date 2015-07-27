@@ -8,7 +8,7 @@ categories:
 前几天追踪了一个线上的crash, 点击cell 上的按钮就会崩溃.由于项目庞大, 花了两天才重现问题.
 不过问题比较容易解决. 开发人员给 UIButton 打了 tag, 在处理相应的 Action 回调时, 进行了判别.
 
-可以 tag 赋值太大了, 而 tag 是 NSInteger 类型,
+可惜 tag 赋值太大了, 而 tag 是 NSInteger 类型,
 
 {% highlight objc %}
 #if __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
