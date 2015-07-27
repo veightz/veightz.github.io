@@ -22,6 +22,8 @@ typedef unsigned int NSUInteger;
 
 在 C 语言中, int 始终是4个字节的, 而 long 在32位平台下是4字节, 64位下是8字节的, 虽然不清楚为什么不直接把 NSInteger 定义为 long 的别名.
 
+更多细节 ~> [Major64-BitChanges](https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Major64-BitChanges/Major64-BitChanges.html)
+
 问题修复比较容易,
 
 {% highlight objc %}
