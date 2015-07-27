@@ -12,6 +12,8 @@ NSLog(@"%@", objc);
 
 原生类的效果还不错，但是自定义的类给出的信息可能只有类型名和内存地址了。
 
+系统有接口让我们对其进行定制。
+
 看了下头文件，在`NSObject.h`可以发现：
 {% highlight objc %}
 @protocol NSObject
@@ -41,6 +43,8 @@ ObjectiveC 的两个 Root Class，`NSObject`和`NSProxy`都实现了description�
     return NSStringFromSelector(_cmd);
 }
 {% endhighlight %}
+
+# QuickLook
 
 不过说起来，调试的时候，除了打印文本内容，还可以实现自定义类的`QuickLook`，只要实现`debugQuickLookObject`就行了。
 {% highlight objc %}
