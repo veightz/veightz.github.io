@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Golang生成ObjectiveC接口
-date: 2014-08-29 22:40:22
+title: imageNamed && imageWithContentsOfFile
+date: 2015-08-03 22:40:22
 ---
 
 最近把之前资源瘦身的分支合并了下, 毕竟剁手宝的包已经逼近 100MB 了. 图片资源迁移到 bundle 后, 好像不能在里面新建抽象的 Group 了.

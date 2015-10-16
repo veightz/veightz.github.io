@@ -4,6 +4,7 @@ title: Golang生成ObjectiveC接口
 date: 2014-08-29 22:40:22
 categories:
 ---
+
 之前写ObjectiveC的接口写哭了，因为接口数量实在是太多了，所以写了个Golang的小工具打辅助。
 
 {% highlight go %}
