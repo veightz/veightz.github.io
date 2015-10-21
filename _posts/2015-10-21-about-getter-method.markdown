@@ -16,12 +16,12 @@ categories:
 
 {% highlight objc %}
 + (DataManager *)sharedManager {
-  static DataManager *sharedManager = nil;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    sharedManager = [[self alloc] init];
-  });
-  return sharedManager;
+    static DataManager *sharedManager = nil;
+    static dispatch_once_t onceToken
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[self alloc] init];
+    });
+    return sharedManager;
 }
 {% endhighlight %}
 
