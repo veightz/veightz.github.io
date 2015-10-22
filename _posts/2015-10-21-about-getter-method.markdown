@@ -130,12 +130,12 @@ categories:
 self.view.window 为 nil 时，不是正在显示。为什么不直接 self.view.window 判断呢？
 没错，这个 view 也是用惰性加载的方式实现的。可以自测或者看文档。
 
-`If you access this property and its value is currently nil, the view controller automatically calls the loadView method and returns the resulting view.`
+>If you access this property and its value is currently nil, the view controller automatically calls the loadView method and returns the resulting view.
 
 如何不意外初始化 self.view 呢？
 文档中也给了方法
 
-`Because accessing this property can cause the view to be loaded automatically, you can use the isViewLoaded method to determine if the view is currently in memory. Unlike this property, the isViewLoaded property does not force the loading of the view if it is not currently in memory.`
+>Because accessing this property can cause the view to be loaded automatically, you can use the isViewLoaded method to determine if the view is currently in memory. Unlike this property, the isViewLoaded property does not force the loading of the view if it is not currently in memory.`
 
 其实做了类似 viewController->_view 的事情。也说明了，判断这个 view 是不是为 nil 。在实践中有这个需要在， 所以给了这个方法来判断。
 
