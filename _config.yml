@@ -2,8 +2,10 @@ name: Veight Zhou
 description: 机巧少年不会黑魔法
 meta_description:
 
-markdown: redcarpet
-highlighter: pygments
+markdown: kramdown
+krandown: 
+    input: GFM
+#highlighter: pygments
 logo: false
 gems: [jekyll-paginate]
 paginate: 15
