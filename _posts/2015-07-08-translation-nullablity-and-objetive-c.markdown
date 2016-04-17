@@ -18,7 +18,7 @@ Xcode6.3 提供了一种新的 ObjectiveC 的语言特性来应对这个问题�
 可能你已经猜到了，一个 `__nullable` 指针是允许赋值为 `nil` 和 `NULL` ，而`__nonnull` 指针是不允许这么赋值的。
 你敢这么写，编译器就敢让你编译失败。
 
-{% highlight objc %}
+```objc
 @interface AAPLList : NSObject <NSCoding, NSCopying>
 // ...
 - (AAPLListItem * __nullable)itemWithName:(NSString * __nonnull)name;
@@ -29,7 +29,7 @@ Xcode6.3 提供了一种新的 ObjectiveC 的语言特性来应对这个问题�
 // --------------
 
 [self.list itemWithName:nil]; // warning!
-{% endhighlight %}
+```
 
 一般来说，你能使用 `const` 这个 C 关键字的地方，你就能用 `__nullable` 和 `__nonnull`，
 当然啦，必须是给指针类型用。
@@ -37,17 +37,17 @@ Xcode6.3 提供了一种新的 ObjectiveC 的语言特性来应对这个问题�
 就是紧接着左括号，直接使用没有下划线的形式，`nullable` 和 `nonnull`。
 当然啦，也要是个对象或者 block 的指针。
 
-{% highlight objc %}
+```objc
 - (nullable AAPLListItem *)itemWithName:(nonnull NSString *)name;
 - (NSInteger)indexOfItem:(nonnull AAPLListItem *)item;
-{% endhighlight %}
+```
 
 对于属性来说，你也能在属性的类型列表中使用这种没有下划线的形式。
 
-{% highlight objc %}
+```objc
 @property (copy, nullable) NSString *name;
 @property (copy, readonly, nonnull) NSArray *allItems;
-{% endhighlight %}
+```
 
 这种无下划线的形式的确是有下划线的形式好用，但是你需要在每个类型前面加一遍关键字。
 为了让工作少点体力活，让你的代码更加清爽，你一定会喜欢用区域性标注(`Audited Regions`)。
@@ -58,7 +58,7 @@ Xcode6.3 提供了一种新的 ObjectiveC 的语言特性来应对这个问题�
 准确来说，这个区域内的普通指针，都会默认赋予 `nonnull` 属性，
 所以我们之前的例子可以简化得更加简单。
 
-{% highlight objc %}
+```objc
 NS_ASSUME_NONNULL_BEGIN
 @interface AAPLList : NSObject <NSCoding, NSCopying>
 // ...
@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_END
 self.list.name = nil;   // okay
 
 AAPLListItem *matchingItem = [self.list itemWithName:nil];  // warning!
-{% endhighlight %}
+```
 
 出于安全性考虑，以下的情况是例外的：
 
@@ -108,7 +108,7 @@ AAPLListItem *matchingItem = [self.list itemWithName:nil];  // warning!
 
 标注前：
 
-{% highlight swift %}
+```swift
 class AAPLList : NSObject, NSCoding, NSCopying {
 	// ...
 	func itemWithName(name: String!) -> AAPLListItem!
@@ -118,11 +118,11 @@ class AAPLList : NSObject, NSCoding, NSCopying {
 	@NSCopying var allItems: [AnyObject]! { get }
 	// ...
 }
-{% endhighlight %}
+```
 
 标注后：
 
-{% highlight swift %}
+```swift
 class AAPLList : NSObject, NSCoding, NSCopying {
 	// ...
 	func itemWithName(name: String) -> AAPLListItem?
@@ -132,7 +132,7 @@ class AAPLList : NSObject, NSCoding, NSCopying {
 	@NSCopying var allItems: [AnyObject] { get }
 	// ...
 }
-{% endhighlight %}
+```
 
 现在 Swift 代码更加干净了。这微妙的改变，会让你使用你的框架更加的愉悦。
 

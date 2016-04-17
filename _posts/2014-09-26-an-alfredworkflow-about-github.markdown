@@ -15,21 +15,21 @@ categories:
 # 实现
 随便在github搜个内容,就能看到请求的整个URL:
 
-{% highlight sh%}
+```sh
 https://github.com/search?utf8=**✓**&q=afnetwork
-{% endhighlight %}
+```
 
 于是在Alfred Workflow的配置里添加了:
 
-{% highlight sh%}
+```sh
 https://github.com/search?utf8=✓&q={query}
-{% endhighlight %}
+```
 
 可是发现报错了,看了下, 是 **✓** 过不了=-=, 不太懂Web, 不知道怎么绕过去,希望高手解答下=-=.
 于是我粗暴的写了:
 
-{% highlight sh%}
+```sh
 https://github.com/search?q={query}
-{% endhighlight %}
+```
 
 说起来还真是暗搓搓的=-=

@@ -23,9 +23,9 @@ Alcatraz 是一款Xcode5下的图形化包管理工具, 可以方便的安装各
 
 ### 方法一: 命令行安装
 
-{% highlight sh %}
+```sh
 xcode-select --install
-{% endhighlight %}
+```
 
 ### 方法二: 去开发者中心下载DMG包安装
 
@@ -37,27 +37,27 @@ xcode-select --install
 我遇到这个问题,是因为昨晚升了git的版本(使用brew cask, [点击查看详情](/2014/08/30/brew-cask/), 然后git的路径就变了,导致问题的出现.Alcatraz中有一行源码:
 <!--more-->
 
-{% highlight objc %}
+```objc
 // ATZGit.h
 static NSString *const GIT = @"/usr/local/bin/git";
-{% endhighlight %}
+```
 
 可以看到它指向了`/usr/local/bin/git`这个位置去调用git.这个位置是自带git的路径,而我更新了git后,安装的路径在`/usr/local/bin/git`, 查看自己当前git路径的方法:
 
-{% highlight sh %}
+```sh
 which git
-{% endhighlight %}
+```
 
 我的输出结果为:
 
-{% highlight sh %}
+```sh
 /usr/bin/git
-{% endhighlight %}
+```
 
 所以Alcatraz在`/usr/local/bin/git`找不到git,就报错了.解决这个问题, 我们在`/usr/local/bin/`下做个软链接, 指向我们现在的git路径,这样Alcatraz就能正确找到git了.代码如下:
 
-{% highlight sh %}
+```sh
 sudo ln -s /usr/local/bin/git /usr/bin/git
-{% endhighlight %}
+```
 
 > More Details:<https://github.com/supermarin/Alcatraz/issues/152>

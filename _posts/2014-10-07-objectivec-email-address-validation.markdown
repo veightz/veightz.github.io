@@ -7,7 +7,7 @@ categories:
 
 客户端判断邮箱格式合法.
 
-{% highlight objc %}
+```objc
 - (BOOL)validateEmail:(NSString *) candidate {
     NSString *emailRegex =
     @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -21,4 +21,4 @@ categories:
 
     return [emailTest evaluateWithObject:candidate];
 }
-{% endhighlight %}
+```

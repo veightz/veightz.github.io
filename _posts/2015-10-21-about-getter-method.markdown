@@ -14,7 +14,7 @@ categories:
 使用dispatch_once_t做初始化的标志位的方法主要用于一些单例的生成，而且这种类往往不是视图，在应用的生命周期中多次使用，不是意外情况下不会被释放。
 同时这样的方法是线程安全的。
 
-{% highlight objc %}
+```objc
 + (DataManager *)sharedManager {
     static DataManager *sharedManager = nil;
     static dispatch_once_t onceToken
@@ -23,11 +23,11 @@ categories:
     });
     return sharedManager;
 }
-{% endhighlight %}
+```
 
 另一种判断实例变量是否为 nil 的方法常见于对象的属性的初始化。
 
-{% highlight objc %}
+```objc
 - (UIView *)aView {
     if (!_aView) {
         _aView = [[UIView alloc] init];
@@ -35,7 +35,7 @@ categories:
     }
     return aView;
 }
-{% endhighlight %}
+```
 
 对于视图对象来说，使用实例变量是否为空来判断会更加方便。不用过多的考虑在什么位置放置初始化的逻辑，也不用有意去处理属性为空的逻辑。
 虽然逻辑上有非线程安全的问题，但是在 iOS 的平台上，UI 操作会在主队列进行，主队列又是串行单线程，所以不用担心这个问题。
@@ -44,7 +44,7 @@ categories:
 
 经常看到一些代码，在 getter 方法中的初始化过程中做了很多很多事情。比如在刚刚的例子里，
 
-{% highlight objc %}
+```objc
 - (UIView *)aView {
     if (!_aView) {
         _aView = [[UIView alloc] init];
@@ -56,35 +56,35 @@ categories:
     }
     return aView;
 }
-{% endhighlight %}
+```
 
 乍一看也没什么啊，好像还挺方便的样子。（要是 frame 逻辑不多，直接设定好的话。）
 
 如果 Memory Warning 来了呢？
 
-{% highlight objc %}
+```objc
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
 }
-{% endhighlight %}
+```
 
 如果不进行 _aView = nil 的处理，要是 self.view 被释放了，那么 _aView.superview 也就为 nil 了。
 可是 _aView 还在（也说明没被释放掉），那么所有的 self.aView 直接返回 _aView 。但是 _aView 也不在之后的 self.view 上。
 可能一时之间变成诡异的 bug 。
 
-{% highlight objc %}
+```objc
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     _aView = nil;
 }
-{% endhighlight %}
+```
 
 那么好，我加上指向 nil 的处理行了吧。要是 self.view 最后没被释放，那么 _aView 作为 self.view.subviews 被继续持有着。
 当下一段 self.aView 出现时，一个克隆体就盖了上去。
 
 在一些特别的情况下，可能会出现下面的代码：
 
-{% highlight objc %}
+```objc
 - (UIView *)xView {
     if (!_xView) {
         _xView = [[UIView alloc] init];
@@ -101,7 +101,7 @@ categories:
     [super didReceiveMemoryWarning];
     [_xView removeFromSuperview];
 }
-{% endhighlight %}
+```
 
 在某种机缘巧合下，_xView 顺利从 _yView 中被移除，但是自己没有被释放。于是再也没有重新被添加回去的机会了。。。
 
@@ -119,13 +119,13 @@ categories:
 
 举个例子，还是 Memory Warning 中的处理， 一般来说，都是要判断下当前视图控制器的 view 是不是正在显示的。
 
-{% highlight objc %}
+```objc
 - (void)didReceiveMemoryWarning{
     if (!(self.isViewLoaded && self.view.window)){
     }
     [super didReceiveMemoryWarning];
 }
-{% endhighlight %}
+```
 
 self.view.window 为 nil 时，不是正在显示。为什么不直接 self.view.window 判断呢？
 没错，这个 view 也是用惰性加载的方式实现的。可以自测或者看文档。

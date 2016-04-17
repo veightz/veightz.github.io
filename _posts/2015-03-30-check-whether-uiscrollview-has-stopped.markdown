@@ -10,7 +10,7 @@ categories:
 # Objective C 下的 hacks
 
 在[栈溢出](http://stackoverflow.com/questions/993280/how-to-detect-when-a-uiscrollview-has-finished-scrolling)上很快找到之前的通解.
-{% highlight objc %}
+```objc
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
   [NSObject cancelPreviousPerformRequestsWithTarget:self];
   //ensure that the end of scroll is fired.
@@ -22,7 +22,7 @@ categories:
   [NSObject cancelPreviousPerformRequestsWithTarget:self];
   // ...
 }
-{% endhighlight %}
+```
 
 # Swift 的悲剧
 
@@ -52,7 +52,7 @@ Swift 下没法使用相关接口..
 2. drag 完后,  没有产生惯性, 直接停下来了, 所以我们要在did end  dragging 后就做一次判断,
 	所以我们可以在`scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)`中, 对参数`decelerate`进行判断.
 
-{% highlight swift %}
+```swift
 // MARK: UIScrollViewDelegate
 extension YourViewControllerOrViewClass: UIScrollViewDelegate {
   // case 1:
@@ -71,4 +71,4 @@ extension YourViewControllerOrViewClass: UIScrollViewDelegate {
     // ...
   }
 }
-{% endhighlight %}
+```

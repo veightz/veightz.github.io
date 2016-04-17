@@ -11,50 +11,50 @@ homebrew 是Mac下一个包管理工具， 可以方便得安装Mac下许多命�
 # 安装Homebrew
 
 ## 在终端输入命令
-{% highlight sh %}
+```sh
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-{% endhighlight %}
+```
 ## 如果遇到需要安装Command Line Tools
 <!-- more -->
-{% highlight sh %}
+```sh
 xcode-select --install
-{% endhighlight %}
+```
 
 # 安装cask
 
 ## 在终端输入命令
-{% highlight sh %}
+```sh
 brew tap phinze/cask
 brew install brew-cask
-{% endhighlight %}
+```
 
 ## 使用brew cask
 
 ### 比如我现在想要安装 wireshark
 
-{% highlight sh %}
+```sh
 brew cask search wireshark
-{% endhighlight %}
+```
 输入结果：
-{% highlight sh %}
+```sh
 ==> Exact match
 wireshark
-{% endhighlight %}
+```
 那我就放心的输入：
-{% highlight sh %}
+```sh
 brew cask install wireshark
-{% endhighlight %}
+```
 就行了。
 
 ### 查看brew cask的软件库
-{% highlight sh %}
+```sh
 brew cask search
-{% endhighlight %}
+```
 你会发现数量实在是。。。。多。别说是QQ了， 连qq音乐都有.
 
 ### 删除
-{% highlight sh %}
+```sh
 brew cask remove <target_name>
-{% endhighlight %}
+```
 
 > 其实就是比单纯用brew时，后边都加了个 cask . =_=!

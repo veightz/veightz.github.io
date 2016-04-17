@@ -11,7 +11,7 @@ categories:
 修改起来其实很简单,就是体力活.
 两个简单的例子就能说明.
 
-{% highlight c %}
+```c
 // Setter
 // 报错形式
 objct->isa = _JKArrayClass;
@@ -23,6 +23,6 @@ object_setClass(object,_JKArrayClass);
 _JKArrayClass = objct->isa;
 // 修改方法
 _JKArrayClass = object_getClass(object);
-{% endhighlight %}
+```
 
 简单的说就是不能再用原来object->isa去get或者set了,而是需要自己手动调用getter或setter.

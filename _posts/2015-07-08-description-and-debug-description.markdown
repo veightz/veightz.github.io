@@ -6,16 +6,16 @@ date: 2015-07-08
 
 有时候我们会在代码中直接输出对象，如：
 
-{% highlight objc%}
+```objc
 NSLog(@"%@", objc);
-{% endhighlight %}
+```
 
 原生类的效果还不错，但是自定义的类给出的信息可能只有类型名和内存地址了。
 
 系统有接口让我们对其进行定制。
 
 看了下头文件，在`NSObject.h`可以发现：
-{% highlight objc %}
+```objc
 @protocol NSObject
 
 // ...
@@ -25,7 +25,7 @@ NSLog(@"%@", objc);
 @property (readonly, copy) NSString *debugDescription;
 
 @end
-{% endhighlight %}
+```
 
 协议`NSObject`(不是类， 是协议) ，声明了`description`，`debugDescription`这两个属性，
 ObjectiveC 的两个 Root Class，`NSObject`和`NSProxy`都实现了description，当代码逻辑中直接打印对象的时候，就是调用`description`。
@@ -34,7 +34,7 @@ ObjectiveC 的两个 Root Class，`NSObject`和`NSProxy`都实现了description�
 由于`debugDescription`是`optional`, `NSObject`并没有实现它，倒是`NSProxy`进行了实现，不过日常开发的时候，用的都是`NSObject`的子类。
 
 测试用例：
-{% highlight objc %}
+```objc
 - (NSString *)description {
     return NSStringFromSelector(_cmd);
 }
@@ -42,12 +42,12 @@ ObjectiveC 的两个 Root Class，`NSObject`和`NSProxy`都实现了description�
 - (NSString *)debugDescription {
     return NSStringFromSelector(_cmd);
 }
-{% endhighlight %}
+```
 
 # QuickLook
 
 不过说起来，调试的时候，除了打印文本内容，还可以实现自定义类的`QuickLook`，只要实现`debugQuickLookObject`就行了。
-{% highlight objc %}
+```objc
 - (id)debugQuickLookObject
 {
     // allocate the return object for the data you wish to represent
@@ -60,6 +60,6 @@ ObjectiveC 的两个 Root Class，`NSObject`和`NSProxy`都实现了description�
     // return the object
     return _quickLookImage;
 }
-{% endhighlight %}
+```
 
 > [More Details about Enabling Quick Look for Custom Types]( https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/CustomClassDisplay_in_QuickLook/CH01-quick_look_for_custom_objects/CH01-quick_look_for_custom_objects.html)

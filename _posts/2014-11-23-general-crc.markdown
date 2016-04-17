@@ -9,7 +9,7 @@ categories:
 - 不同类型的 CRC 矩阵直接丢二进制了
 - 由于奇偶校验是一种特殊的 CRC, 直接一起写了
 
-{% highlight cpp %}
+```cpp
 #include <iostream>
 #include <bitset>
 enum CRCType {CRC1, CRC4, CRC16, CRC32};
@@ -207,4 +207,4 @@ int main(int argc, const char * argv[]) {
 //    generalCRC(0x1234, CRC16);
     return 0;
 	}
-{% endhighlight %}
+```

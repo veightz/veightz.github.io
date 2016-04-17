@@ -10,7 +10,7 @@ categories:
 
 可惜 tag 赋值太大了, 而 tag 是 NSInteger 类型,
 
-{% highlight objc %}
+```objc
 #if __LP64__ || (TARGET_OS_EMBEDDED && !TARGET_OS_IPHONE) || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
 typedef long NSInteger;
 typedef unsigned long NSUInteger;
@@ -18,7 +18,7 @@ typedef unsigned long NSUInteger;
 typedef int NSInteger;
 typedef unsigned int NSUInteger;
 #endif
-{% endhighlight %}
+```
 
 在 C 语言中, int 始终是4个字节的, 而 long 在32位平台下是4字节, 64位下是8字节的, 虽然不清楚为什么不直接把 NSInteger 定义为 long 的别名.
 
@@ -26,20 +26,20 @@ typedef unsigned int NSUInteger;
 
 问题修复比较容易,
 
-{% highlight objc %}
+```objc
 //#define kSelfPickUpButtonTag 201506240754
 static NSInteger kSelfPickUpButtonTag = 1506240754;
 //#define kAgentReceiveButtonTag 201506240755
 static NSInteger kAgentReceiveButtonTag = 1506240755;
-{% endhighlight %}
+```
 
 由于 2^31 = 2147483648, 201506240754 和 201506240755 会在32位在溢出.
 又由于开发的同学用了宏定义, 编译器也没有吐槽, 就容易忽视掉, 如果代码写成下面这个样子,
 
-{% highlight objc %}
+```objc
 static NSInteger kSelfPickUpButtonTag = 201506240754;
 static NSInteger kAgentReceiveButtonTag = 201506240755;
-{% endhighlight %}
+```
 
 编译器还是会报 warning的, 容易提早发现问题.
 

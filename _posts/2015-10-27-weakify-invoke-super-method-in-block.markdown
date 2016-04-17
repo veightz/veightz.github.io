@@ -13,9 +13,9 @@ categories:
 
 这个问题大家都知道怎么解决
 
-{% highlight objc %}
+```objc
 __weak typeof(self) weakSelf = self;
-{% endhighlight objc %}
+```
 
 或者用 `@weakify(self)` 和 `@strongify(self)` 去处理。
 
@@ -40,7 +40,7 @@ __weak typeof(self) weakSelf = self;
 它们都有一个 foo 方法，输出自己的类名。
 防止引入其他 Runtime 的特性造成验证干扰，没有使用 `NSStringFromClass()` 去获取类名。
 
-{% highlight objc %}
+```objc
 @interface Father : NSObject
 - (void)foo;
 @end
@@ -50,9 +50,9 @@ __weak typeof(self) weakSelf = self;
     NSLog(@"Father");
 }
 @end
-{% endhighlight objc %}
+```
 
-{% highlight objc %}
+```objc
 @interface Child : Father
 @property (nonatomic, copy) void (^callback)();
 - (void)configThenInvokeBlock;
@@ -75,14 +75,14 @@ __weak typeof(self) weakSelf = self;
 - (void)dealloc {
     NSLog(@"Child instance released.");
 }
-{% endhighlight objc %}
+```
 
 ## 方法一：包装父类调用
 
 这是第一种方法，比较土，但是也是最方便和清楚的方式。
 创建了一个子类的方法，它的实现是去调用父类实现，在 block 中调用这个创建的子类方法。
 
-{% highlight objc %}
+```objc
 - (void)configThenInvokeBlock {
     __weak typeof(self) weakSelf = self;
     [self setCallback:^{
@@ -97,12 +97,12 @@ __weak typeof(self) weakSelf = self;
 - (void)super_foo {
     [super foo];
 }
-{% endhighlight objc %}
+```
 要是需要调用的父类实现比较多，那就是体力活了+_=
 
 ## 方法二：让 weakSelf 执行父类方法实现
 
-{% highlight objc %}
+```objc
 - (void)configThenInvokeBlock {
     __weak typeof(self) weakSelf = self;
     [self setCallback:^{
@@ -116,14 +116,14 @@ __weak typeof(self) weakSelf = self;
     }];
     self.callback();
 }
-{% endhighlight objc %}
+```
 
 通过`class_getInstanceMethod`拿到父类的方法的实现，然后用 `method_invoke` 去调用执行。
 不过这里要做一下函数的类型转换，以免 LLVM 吐槽 `too many arguments`。
 
 ## 方法三：通过 weakSelf 构造 objc\_super，调用 objc_msgSendSuper
 
-{% highlight objc %}
+```objc
 - (void)configThenInvokeBlock {
     __weak typeof(self) weakSelf = self;
     [self setCallback:^{
@@ -137,7 +137,7 @@ __weak typeof(self) weakSelf = self;
     }];
     self.callback();
 }
-{% endhighlight objc %}
+```
 
 这里的思路是利用 `objc_msgSendSuper` 去实现调用父类实现。
 先使用 `weakSelf` 去构造一个 `objc_super` 类型的结构体，
@@ -151,7 +151,7 @@ __weak typeof(self) weakSelf = self;
 
 方便大家测试， 贴一段混合的 configThenInvokeBlock 全家桶。
 
-{% highlight objc %}
+```objc
 - (void)configThenInvokeBlock {
     __weak typeof(self) weakSelf = self;
     [self setCallback:^{
@@ -196,4 +196,4 @@ __weak typeof(self) weakSelf = self;
     }];
     self.callback();
 }
-{% endhighlight objc %}
+```

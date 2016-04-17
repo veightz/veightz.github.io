@@ -7,7 +7,7 @@ categories:
 
 在开发时处于安全考虑, 会经常使用到MD5.由于比较常用, 就把现在用的代码记一下, 权当笔记.
 
-{% highlight objc %}
+```objc
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 + (NSString *)MD5: (NSString *) inPutText
@@ -23,5 +23,5 @@ categories:
              result[12], result[13], result[14], result[15]
              ] uppercaseString];
 }
-{% endhighlight %}
+```
 当然, 如果需要MD5值为小写字母表达的, 只需要将`uppercaseString`替换为`lowercaseString`就行了.

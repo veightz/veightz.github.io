@@ -14,15 +14,15 @@ categories:
 
 #传统思路实现
 - 进行监听, 并且绑定回调的函数
-{% highlight objc %}
+```objc
 [self.phoneNumberInput
  addTarget:self
  action:@selector(textFieldLimit11Characters:)
  forControlEvents:UIControlEventEditingChanged];
-{% endhighlight %}
+```
 
 - 实现回调的函数
-{% highlight objc %}
+```objc
 - (void)textFieldLimit11Characters:(UITextField *)textField {
     if (textField.text.length >= 11) {
         // 限制11位长度
@@ -33,12 +33,12 @@ categories:
         self.getCheckNumber.enabled = NO;
     }
 }
-{% endhighlight %}
+```
 
 ---
 
 # 使用 ReactiveCocoa 实现
-{% highlight objc %}
+```objc
 // 限制11位长度
 [self.phoneNumberInput.rac_textSignal
  subscribeNext:^(NSString *number) {
@@ -54,4 +54,4 @@ RAC(self, getCheckNumber.enabled) =
  reduce:^(NSString *number) {
  return @(number.length >= 11);
 }];
-{% endhighlight %}
+```

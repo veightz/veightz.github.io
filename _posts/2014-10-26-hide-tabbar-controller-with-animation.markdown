@@ -7,19 +7,19 @@ categories:
 
 We always hide some bars animated, like navigation bar:
 
-{% highlight objc %}
+```objc
 [self.navigationController setNavigationBarHidden:YES animated:YES];
-{% endhighlight %}
+```
 
 However, when wo want to hide tab bar, we find we do not have a API to hide it with animation.
 
-{% highlight objc %}
+```objc
 [self.tabBarController.tabBar setHidden:YES];
-{% endhighlight %}
+```
 
 Finally, I get a wonderful way to solve it on `stavkoverflow`.
 
-{% highlight objc %}
+```objc
 - (void)setTabBarVisible:(BOOL)visible animated:(BOOL)animated {
 
     // bail if the current state matches the desired state
@@ -42,5 +42,5 @@ Finally, I get a wonderful way to solve it on `stavkoverflow`.
 - (BOOL)tabBarIsVisible {
     return self.tabBarController.tabBar.frame.origin.y < CGRectGetMaxY(self.view.frame);
 }
-{% endhighlight %}
+```
 > http://stackoverflow.com/questions/20935228/how-to-hide-tab-bar-with-animation-in-ios
