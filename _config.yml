@@ -5,11 +5,13 @@ meta_description:
 markdown: redcarpet
 highlighter: pygments
 logo: false
+gems: [jekyll-paginate]
 paginate: 15
+paginate_path: "page:num"
 baseurl: /
-domain_name: 'http://veightz.net'
+# domain_name: 'http://veightz.net'
 google_analytics: 'UA-XXXXXXXX-X'
 
 # Details for the RSS feed generator
-url:            'veightz.net'
+# url:            'veightz.net'
 author:         'Veight Zhou'
